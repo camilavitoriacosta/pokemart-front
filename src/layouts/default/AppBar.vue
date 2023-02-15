@@ -19,7 +19,7 @@ export default {
   data() {
     return {
       drawer: false,
-      menus:[
+      menus: [
         {
           title: "Pokemons",
           value: "/pokemons"

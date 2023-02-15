@@ -10,7 +10,7 @@
                   @click="toggle">
                   <v-scroll-y-transition>
                     <div class="text-h3 flex-grow-1 text-center">
-                      {{ isSelected? pokemon.numeroPokedex : pokemon.nome }}
+                      {{ isSelected? "Nível: "+ pokemon.nivel : pokemon.nome }}
                     </div>
                   </v-scroll-y-transition>
                 </v-card>
@@ -23,33 +23,22 @@
   </v-container>
 </template>
 
-<script >
+<script>
+import axios from 'axios';
+
 export default {
   data() {
     return {
       pokemons: [
-        {
-          nome: "Pikachu",
-          nivel: "25",
-          numeroPokedex: "26"
-        },
-        {
-          nome: "Charmander",
-          nivel: "25",
-          numeroPokedex: "4"
-        },
-        {
-          nome: "Squirte",
-          nivel: "25",
-          numeroPokedex: "7"
-        },
-        {
-          nome: "Bulbassauro",
-          nivel: "25",
-          numeroPokedex: "1"
-        },
       ]
     }
+  },
+  mounted() {
+    axios.get("http://localhost:8080/pokemons/").then((resposta) => {
+      this.pokemons = resposta.data;
+    }).catch((erro) => {
+      console.log(erro);
+    });
   }
 }
 </script>
